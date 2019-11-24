@@ -19,7 +19,7 @@ model.add(Dense(100))
 model.add(Dense(5, activation='sigmoid'))
 
 model.compile(optimizer='rmsprop',
-              loss='categorical_crossentropy',
+              loss='mean_absolute_error',
               metrics=['accuracy'])
 
 n_data = np.array(data.dataset_easy)
