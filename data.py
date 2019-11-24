@@ -227,7 +227,7 @@ def load_images():
     img_list = []
 
     for imgp in imp:
-        img = load_img(imgp, target_size=(128, 128))
+        img = load_img(imgp, target_size=(256, 256))
         print(img.size)
 
         img = img_to_array(img)
