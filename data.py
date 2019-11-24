@@ -1,3 +1,9 @@
+from keras.preprocessing.image import load_img
+from keras.preprocessing.image import img_to_array
+from keras.preprocessing.image import array_to_img
+import glob
+import numpy as np
+
 raw_data = [
 ( "vs code", "ubuntu", "python", "spaces", "none", "human"), 
 ( "none", "Windows", "python", "tabs", "Tesla", "human"), 
@@ -91,6 +97,26 @@ out_raw =[
 [3.33, 3.67 ,2.67 , 5.33 , 3.33], 
 ]
 
+val_raw = [("Kate", "Linux",       "c++", "tabs", "Tesla", "Human"),
+("vs code", "Linux",    "python", "both", "Porsche", "human"),
+("vs code", "Windows",  "typescript", "tabs", "Audi", "human"),
+("vs code", "Linux",    "python", "both", "BMW", "human"),
+("vs code", "macos",    "python", "tabs", "Porsche", "human"),
+("vs code", "macos",    "python", "tabs", "not know", "human"),
+("pycharm", "macos",    "python", "tabs", "BMW", "human"),
+("vs code", "ubuntu",   "python", "tabs", "Buick", "human") ]
+
+val_res =  [
+ [4.33  , 6.67, 3.0  , 4.67 , 4.33],
+ [5.0   , 4.0 , 3.67 , 5.33 , 3.33],
+ [6.0   , 5.0 , 5.33 , 5.33 , 3.0],
+ [3.67  , 4.67, 5.0  , 5.0  , 4.0],
+ [3.0   , 3.33, 3.33 , 3.33 , 3.67],
+ [6.33  , 2.33, 3.0  , 4.0  , 4.33],
+ [4.67  , 2.67, 5.33 , 3.33 , 4.67],
+ [5.0   , 2.0 , 1.0  , 6.33 , 2.67]]
+
+ 
 out_norm = []
 
 for a in out_raw:
@@ -104,7 +130,14 @@ oss = []
 languages = []
 cars = []
 
+
 for editor, used_os, language, tvs, car, hva in raw_data:
+    editors.append(editor.lower())
+    oss.append(used_os.lower())
+    languages.append(language.lower())
+    cars.append(car.lower())
+
+for editor, used_os, language, tvs, car, hva in val_raw:
     editors.append(editor.lower())
     oss.append(used_os.lower())
     languages.append(language.lower())
@@ -142,3 +175,47 @@ for editor, used_os, language, tvs, car, hva in raw_data:
     elem.append(choice_employ)
 
     dataset_easy.append(elem)
+
+
+dataset_val = []
+for editor, used_os, language, tvs, car, hva in val_raw:
+    
+    elem = []
+    editor_hot = [0] * len(editors)
+    editor_hot[editor_dict[editor.lower()]] = 1
+    elem += editor_hot
+
+    oss_hot = [0] * len(oss)
+    oss_hot[oss_dict[used_os.lower()]] = 1
+    elem += oss_hot
+
+    lang_hot = [0] * len(languages)
+    lang_hot[languages_dict[language.lower()]] = 1
+    elem += lang_hot
+
+    car_hot = [0] * len(cars)
+    car_hot[cars_dict[car.lower()]] = 1
+    elem += car_hot
+
+    choice_indent = tvs.lower() == "tabs"
+    choice_employ = hva.lower() == "human"
+
+    elem.append(choice_indent)
+    elem.append(choice_employ)
+
+    dataset_val.append(elem)
+
+img_paths = sorted(glob.glob("img/*.jpg"))
+
+def load_images():
+    img_list = []
+    
+    for imgp in img_paths:
+        img = load_img(imgp, target_size=(300, 300))
+
+        img = img_to_array(img)
+        img = np.expand_dims(img, axis=0)
+
+        img_list.append(img)
+    
+    return img_list

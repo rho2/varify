@@ -36,7 +36,7 @@ x = np.array([elem])
 
 print(x)
 
-model = load_model('got_predict.h5')
+model = load_model('questions.h5')
 t = model.predict(x, verbose=2)
 
 print(*t)

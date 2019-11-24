@@ -25,5 +25,8 @@ model.compile(optimizer='rmsprop',
 n_data = np.array(data.dataset_easy)
 n_label = np.array(data.out_norm)
 
-model.fit(n_data, n_label, epochs=100, batch_size=4, verbose=1)
-model.save('got_predict.h5')
+n_val_data = np.array(data.dataset_val)
+n_val_label = np.array(data.val_res)
+
+model.fit(n_data, n_label, epochs=100, batch_size=4, verbose=1, validation_data=(n_val_data, n_val_label))
+model.save('question.h5')
