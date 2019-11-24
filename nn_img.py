@@ -9,6 +9,9 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from keras.utils import plot_model
 from keras.optimizers import Adam
 
+from heraspy.callback import HeraCallback
+
+
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
 session = tf.Session(config=config)
@@ -63,12 +66,12 @@ model.add(Dense(5))
 model.add(Activation('sigmoid'))
 
 
-model.compile(Adam(learning_rate=0.0005),
+model.compile(Adam(learning_rate=0.0009),
               loss='mean_absolute_error',
               metrics=['accuracy'])
 
-
-history = model.fit_generator(it, verbose=1, steps_per_epoch=30, epochs=250)
+history = model.fit_generator(
+    it, verbose=1, steps_per_epoch=10, epochs=100)
 model.save('img.h5')
 
 plot_model(model, to_file='model.png')

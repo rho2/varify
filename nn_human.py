@@ -10,7 +10,7 @@ model = Sequential()
 model.add(Dense(N))
 
 model.add(Dense(10))
-
+model.add(Dense(7))
 model.add(Dense(5, activation='sigmoid'))
 
 model.compile(optimizer='rmsprop',
@@ -20,5 +20,5 @@ model.compile(optimizer='rmsprop',
 n_data = np.array(data.human_data)
 n_label = np.array(data.out_norm)
 
-model.fit(n_data, n_label, epochs=100, batch_size=1, verbose=1)
+model.fit(n_data, n_label, epochs=5000, batch_size=32, verbose=1)
 model.save('human.h5')

@@ -19,4 +19,9 @@ This neural network is trying to find the personality traints of a person based 
 ## nn_human
 This network is filled with data that is collected from humans like the openess of a person to williing  a short interview.
 
+|network| loss | accuracy |
+|---|---|---|
+| nn.py | 0.0345 | 0.7857 |
+| nn_img | 0.1383 | 0.4118 |
+| nn_human | 0.1273 | 0.4643 |
 
