@@ -9,9 +9,6 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from keras.utils import plot_model
 from keras.optimizers import Adam
 
-from heraspy.callback import HeraCallback
-
-
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
 session = tf.Session(config=config)
