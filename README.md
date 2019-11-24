@@ -11,4 +11,12 @@ Containes the training data the we created to be able to teach our algotrithms t
 Simple neural network looking at the most important the we as software develpoes have to make: choosing our favourite editor ot the right programming language for the  job etc.
 
 #### nn_test.py
-Small application to test the output of nn.py with customazible inputs
+Small application to test the output of nn.py with customazible inputs.
+
+## nn_img
+This neural network is trying to find the personality traints of a person based on their image itself. Using the nn_img_test.py script it is possible to run the trained algotimhn on an own image.
+
+## nn_human
+This network is filled with data that is collected from humans like the openess of a person to williing  a short interview.
+
+
